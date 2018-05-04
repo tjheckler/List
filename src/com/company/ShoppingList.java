@@ -73,35 +73,32 @@ public class ShoppingList
                 {
                     System.out.println(i + " " + foodList.get(i));
                 }
-            }
-            else if (command.equals("FIND"))
+            } else if (command.equals("FIND"))
             {
-
-                for (int i = 0; i < foodList.size(); i++)
+               String[] regexe = commandLine.split(" ");
+                Pattern pattern = Pattern.compile(regexe[1]);
+                Matcher matcher = pattern.matcher(commandLine);
+                if (matcher.find()) ;
                 {
 
-                    String[] regexe = commandLine.split(" ");
-                    Pattern pattern = Pattern.compile(regexe[1]);
-                    Matcher matcher = pattern.matcher(commandLine);
+                }
 
-                    if (matcher.find(1)) {
-                        System.out.println("matches() found the pattern \"" + matcher.group()
-                                + "\" starting at index " + matcher.start()
-                                + " and ending at index " + matcher.end());
-                    } else  {
-                        System.out.println("matches() found nothing");
+                    for (int i = 0; i < foodList.size(); i++)
+                    {
+                        if (foodList.get(i).contains(regexe[1]))
+                        {
+                            // find the next match
+                            System.out.println("Found it! It is in the list, Which is " + foodList.get(i));
+                        } else
+                        {
+                            System.out.println("Item not found");
+                        }
+
                     }
 
-                   /* while (matcher.find());
-                    {
 
 
-                        // find the next match
-                        System.out.println("Found it! \" is in the list, Which is " + foodList.get(i));
 
-
-                    }*/
-                }
             } else
             {
                 System.out.println("Please Try Again");
