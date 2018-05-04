@@ -43,12 +43,12 @@ public class ShoppingList
             command = commands[0].toUpperCase();
 
 
-            if (command.equals("ADD"))
+            if (command.equals("ADD")&& commands.length == 2)
             {
                 String itemName = commands[1];
                 foodList.add(itemName);
                 System.out.println("You added: " + itemName);
-            } else if (command.equals("PRINT"))
+            } else if (command.equals("PRINT")&& commands.length == 2)
             {
 
 
@@ -58,24 +58,24 @@ public class ShoppingList
                 }
 
 
-            } else if (command.equals("REMOVE"))
+            } else if (command.equals("REMOVE")&& commands.length == 2)
             {
                 int x = Integer.parseInt(commands[1]);
                 foodList.remove(x);
 
 
-            } else if (command.equals("CLEAR"))
+            } else if (command.equals("CLEAR")&& commands.length == 2)
             {
                 foodList.clear();
                 System.out.println("LIST NOW EMPTY");
-            } else if (command.equals("SORT"))
+            } else if (command.equals("SORT")&& commands.length == 2)
             {
                 Collections.sort(foodList);
                 for (int i = 0; i < foodList.size(); i++)
                 {
                     System.out.println(i + " " + foodList.get(i));
                 }
-            } else if (command.equals("FIND"))
+            } else if (command.equals("FIND")&& commands.length == 2)
             {
                 String[] regexe = commandLine.split(" ");
                 Pattern pattern = Pattern.compile(regexe[1]);
@@ -96,6 +96,10 @@ public class ShoppingList
                     {
                         System.out.println("Looking for " + regexe[1]);
                         System.out.println("Item not found try again!");
+                    }
+                    else
+                    {
+                        System.out.println("Please Try Again");
                     }
                 }
             } else
