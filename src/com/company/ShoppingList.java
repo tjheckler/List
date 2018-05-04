@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class ShoppingList
 {
+    List<String> foodList = new ArrayList<>();
+
     public static void main(String[] args)
     {
         ShoppingList shoppingList = new ShoppingList();
@@ -20,7 +22,7 @@ public class ShoppingList
 
         String commandLine;
 
-        List<String> foodList = new ArrayList<>();
+
         System.out.println("Please Enter one of the Following Commands:");
         System.out.println("Add <Item Name>, Example: 'add cheese' To add item to list");
         System.out.println("Remove <index>, Example: 'remove 0' To remove item from list");
@@ -75,7 +77,7 @@ public class ShoppingList
                 }
             } else if (command.equals("FIND"))
             {
-               String[] regexe = commandLine.split(" ");
+                String[] regexe = commandLine.split(" ");
                 Pattern pattern = Pattern.compile(regexe[1]);
                 Matcher matcher = pattern.matcher(commandLine);
                 if (matcher.find()) ;
@@ -83,19 +85,19 @@ public class ShoppingList
 
                 }
 
-                    for (int i = 0; i < foodList.size(); i++)
+                for (int i = 0; i < foodList.size(); i++)
+                {
+                    if (foodList.get(i).contains(regexe[1]))
                     {
-                        if (foodList.get(i).contains(regexe[1]))
-                        {
-                            // find the next match
-                            System.out.println("Looking for "+ regexe[1]);
-                            System.out.println("Found it! "+ regexe[1]+"  is in the list, Which is " + foodList.get(i));
-                        } else if(!foodList.get(i).equals(regexe) )
-                        {
-                            System.out.println("Looking for "+ regexe[1]);
-                            System.out.println("Item not found try again!");
-                        }
+                        // find the next match
+                        System.out.println("Looking for " + regexe[1]);
+                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + foodList.get(i));
+                    } else if (!foodList.get(i).equals(regexe))
+                    {
+                        System.out.println("Looking for " + regexe[1]);
+                        System.out.println("Item not found try again!");
                     }
+                }
             } else
             {
                 System.out.println("Please Try Again");
