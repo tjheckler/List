@@ -48,7 +48,7 @@ public class ShoppingList
                 String itemName = commands[1];
                 foodList.add(itemName);
                 System.out.println("You added: " + itemName);
-            } else if (command.equals("PRINT")&& commands.length == 2)
+            } else if (command.equals("PRINT"))
             {
 
 
@@ -68,7 +68,7 @@ public class ShoppingList
             {
                 foodList.clear();
                 System.out.println("LIST NOW EMPTY");
-            } else if (command.equals("SORT")&& commands.length == 2)
+            } else if (command.equals("SORT"))
             {
                 Collections.sort(foodList);
                 for (int i = 0; i < foodList.size(); i++)
