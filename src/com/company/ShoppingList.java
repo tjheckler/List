@@ -88,17 +88,12 @@ public class ShoppingList
                         if (foodList.get(i).contains(regexe[1]))
                         {
                             // find the next match
-                            System.out.println("Found it! It is in the list, Which is " + foodList.get(i));
-                        } else
+                            System.out.println("Found it! "+ regexe[1]+"  is in the list, Which is " + foodList.get(i));
+                        } else if(!foodList.get(i).equals(regexe) )
                         {
-                            System.out.println("Item not found");
+                            System.out.println("Item not found try again!");
                         }
-
                     }
-
-
-
-
             } else
             {
                 System.out.println("Please Try Again");
