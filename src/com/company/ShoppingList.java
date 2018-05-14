@@ -43,9 +43,12 @@ public class ShoppingList
             command = commands[0].toUpperCase();
 
 
-            if (command.equals("ADD")&& commands.length == 2)
+            if (command.equals("ADD") && commands.length == 2)
             {
+
                 String itemName = commands[1];
+
+
                 foodList.add(itemName);
                 System.out.println("You added: " + itemName);
             } else if (command.equals("PRINT"))
@@ -58,13 +61,13 @@ public class ShoppingList
                 }
 
 
-            } else if (command.equals("REMOVE")&& commands.length == 2)
+            } else if (command.equals("REMOVE") && commands.length == 2)
             {
                 int x = Integer.parseInt(commands[1]);
                 foodList.remove(x);
 
 
-            } else if (command.equals("CLEAR")&& commands.length == 2)
+            } else if (command.equals("CLEAR") && commands.length == 2)
             {
                 foodList.clear();
                 System.out.println("LIST NOW EMPTY");
@@ -75,7 +78,7 @@ public class ShoppingList
                 {
                     System.out.println(i + " " + foodList.get(i));
                 }
-            } else if (command.equals("FIND")&& commands.length == 2)
+            } else if (command.equals("FIND") && commands.length == 2)
             {
                 String[] regexe = commandLine.split(" ");
                 Pattern pattern = Pattern.compile(regexe[1]);
@@ -96,8 +99,7 @@ public class ShoppingList
                     {
                         System.out.println("Looking for " + regexe[1]);
                         System.out.println("Item not found try again!");
-                    }
-                    else
+                    } else
                     {
                         System.out.println("Please Try Again");
                     }
