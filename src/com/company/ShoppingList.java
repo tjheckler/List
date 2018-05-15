@@ -19,13 +19,14 @@ public class ShoppingList
 
     private void run()
     {
-        String name = "";
+        List<ListItem> items = new ArrayList<>();
+        String name;
         int quantity = 1;
         String commandLine;
 
 
         System.out.println("Please Enter one of the Following Commands:");
-        System.out.println("Add <Item Name> <item amount>, Example: 'add cheese' To add item to list");
+        System.out.println("Add <Item Name>, Example: 'add cheese' To add item to list");
         System.out.println("Remove <index>, Example: 'remove 0' To remove item from list");
         System.out.println("Print, To Print List");
         System.out.println("Sort, To Sort and Print List");
@@ -42,43 +43,49 @@ public class ShoppingList
             commandLine = in.nextLine();
             String[] commands = commandLine.split(" ");
             command = commands[0].toUpperCase();
-            List<ListItem> item = new ArrayList<>();
 
-            if (command.equals("ADD") && commands.length == 3)
+
+            if (command.equals("ADD") && commands.length == 2)
             {
                 name = commands[1];
-                quantity = Integer.parseInt(commands[2]);
-                item.add(new ListItem(name, quantity));
+                ListItem addedItem = new ListItem(name, quantity);
 
-
-                System.out.println("You added: " +quantity+ " "+name);
-            } else if (command.equals("PRINT"))
-            {
-
-
-                for (int i = 0; i < item.size(); i++)
+                if (items.contains(addedItem))
                 {
-                    System.out.println(i + " " + quantity+ " "+name);
+                    //set up like vending machine with counter array
+
+
+                    System.out.println("You added: " );
+                }
+                //this works, above doesn't
+                // else if (!items.contains(addedItem))
+                {
+                    //     items.add(addedItem);
+                    //     System.out.println("You added: " + addedItem.getQuantity()+ " " + name);
                 }
 
-
+            } else if (command.equals("PRINT"))
+            {
+                for (ListItem item : items)
+                {
+                    item.printItems();
+                }
             } else if (command.equals("REMOVE") && commands.length == 2)
             {
                 int x = Integer.parseInt(commands[1]);
-                item.remove(x);
+                items.remove(x);
 
 
             } else if (command.equals("CLEAR") && commands.length == 2)
             {
-                item.clear();
+                items.clear();
                 System.out.println("LIST NOW EMPTY");
             } else if (command.equals("SORT"))
             {
-                Collections.sort(item);
-
-                for (int i = 0; i < item.size(); i++)
+                Collections.sort(items);
+                for (ListItem item : items)
                 {
-                    System.out.println(i + " " + item.get(i));
+                    System.out.println(item.getQuantity() + " " + item.getName());
                 }
             } else if (command.equals("FIND") && commands.length == 2)
             {
@@ -90,14 +97,14 @@ public class ShoppingList
 
                 }
 
-                for (int i = 0; i < item.size(); i++)
+                for (ListItem item : items)
                 {
-                    if (item.get(i).equals(regexe[1]))
+                    if (item.equals(regexe[1]))
                     {
                         // find the next match
                         System.out.println("Looking for " + regexe[1]);
-                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + item.get(i));
-                    } else if (!item.get(i).equals(regexe))
+                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + item);
+                    } else if (!item.equals(regexe))
                     {
                         System.out.println("Looking for " + regexe[1]);
                         System.out.println("Item not found try again!");
@@ -106,9 +113,6 @@ public class ShoppingList
                         System.out.println("Please Try Again");
                     }
                 }
-            } else
-            {
-                System.out.println("Please Try Again");
             }
         }
         while (!command.equals("EXIT"));

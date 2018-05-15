@@ -3,7 +3,7 @@ package com.company;
 public class ListItem implements Comparable
 {
     private String name;
-    private int quantity = 1;
+    private int quantity;
 
     public ListItem (String name, int quantity)
     {
@@ -12,19 +12,21 @@ public class ListItem implements Comparable
     }
 
     public String getName()
+
     {
-        return name;
+        return this.name;
     }
 
     @Override
     public int compareTo(Object that)
+
     {
         return this.getQuantity();
     }
 
     public int getQuantity()
     {
-        return quantity;
+        return this.quantity;
     }
 
     public String setName(String name)
@@ -35,5 +37,9 @@ public class ListItem implements Comparable
     public int setQuantity(int quantity)
     {
         return this.quantity = quantity;
+    }
+    public void printItems()
+    {
+        System.out.println(getQuantity() +" "+ getName());
     }
 }
