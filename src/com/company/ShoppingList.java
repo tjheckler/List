@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class ShoppingList
 {
-    List<String> foodList = new ArrayList<>();
+
 
     public static void main(String[] args)
     {
@@ -19,12 +19,13 @@ public class ShoppingList
 
     private void run()
     {
-
+        String name = "";
+        int quantity = 1;
         String commandLine;
 
 
         System.out.println("Please Enter one of the Following Commands:");
-        System.out.println("Add <Item Name>, Example: 'add cheese' To add item to list");
+        System.out.println("Add <Item Name> <item amount>, Example: 'add cheese' To add item to list");
         System.out.println("Remove <index>, Example: 'remove 0' To remove item from list");
         System.out.println("Print, To Print List");
         System.out.println("Sort, To Sort and Print List");
@@ -41,42 +42,43 @@ public class ShoppingList
             commandLine = in.nextLine();
             String[] commands = commandLine.split(" ");
             command = commands[0].toUpperCase();
+            List<ListItem> item = new ArrayList<>();
 
-
-            if (command.equals("ADD") && commands.length == 2)
+            if (command.equals("ADD") && commands.length == 3)
             {
+                name = commands[1];
+                quantity = Integer.parseInt(commands[2]);
+                item.add(new ListItem(name, quantity));
 
-                String itemName = commands[1];
 
-
-                foodList.add(itemName);
-                System.out.println("You added: " + itemName);
+                System.out.println("You added: " +quantity+ " "+name);
             } else if (command.equals("PRINT"))
             {
 
 
-                for (int i = 0; i < foodList.size(); i++)
+                for (int i = 0; i < item.size(); i++)
                 {
-                    System.out.println(i + " " + foodList.get(i));
+                    System.out.println(i + " " + quantity+ " "+name);
                 }
 
 
             } else if (command.equals("REMOVE") && commands.length == 2)
             {
                 int x = Integer.parseInt(commands[1]);
-                foodList.remove(x);
+                item.remove(x);
 
 
             } else if (command.equals("CLEAR") && commands.length == 2)
             {
-                foodList.clear();
+                item.clear();
                 System.out.println("LIST NOW EMPTY");
             } else if (command.equals("SORT"))
             {
-                Collections.sort(foodList);
-                for (int i = 0; i < foodList.size(); i++)
+                Collections.sort(item);
+
+                for (int i = 0; i < item.size(); i++)
                 {
-                    System.out.println(i + " " + foodList.get(i));
+                    System.out.println(i + " " + item.get(i));
                 }
             } else if (command.equals("FIND") && commands.length == 2)
             {
@@ -88,14 +90,14 @@ public class ShoppingList
 
                 }
 
-                for (int i = 0; i < foodList.size(); i++)
+                for (int i = 0; i < item.size(); i++)
                 {
-                    if (foodList.get(i).contains(regexe[1]))
+                    if (item.get(i).equals(regexe[1]))
                     {
                         // find the next match
                         System.out.println("Looking for " + regexe[1]);
-                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + foodList.get(i));
-                    } else if (!foodList.get(i).equals(regexe))
+                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + item.get(i));
+                    } else if (!item.get(i).equals(regexe))
                     {
                         System.out.println("Looking for " + regexe[1]);
                         System.out.println("Item not found try again!");

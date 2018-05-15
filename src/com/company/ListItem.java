@@ -1,6 +1,6 @@
 package com.company;
 
-public class ListItem
+public class ListItem implements Comparable
 {
     private String name;
     private int quantity = 1;
@@ -16,18 +16,24 @@ public class ListItem
         return name;
     }
 
+    @Override
+    public int compareTo(Object that)
+    {
+        return this.getQuantity();
+    }
+
     public int getQuantity()
     {
         return quantity;
     }
 
-    public void setName(String name)
+    public String setName(String name)
     {
-        this.name = name;
+        return this.name = name;
     }
 
-    public void setQuantity(int quantity)
+    public int setQuantity(int quantity)
     {
-        this.quantity = quantity;
+        return this.quantity = quantity;
     }
 }
