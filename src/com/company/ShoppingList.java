@@ -1,13 +1,7 @@
 package com.company;
-
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class ShoppingList
 {
-
 
     public static void main(String[] args)
     {
@@ -23,7 +17,8 @@ public class ShoppingList
         String name;
         int quantity = 1;
         String commandLine;
-
+        Scanner in = new Scanner(System.in);
+        String command;
 
         System.out.println("Please Enter one of the Following Commands:");
         System.out.println("Add <Item Name>, Example: 'add cheese' To add item to list");
@@ -33,38 +28,41 @@ public class ShoppingList
         System.out.println("Clear, To clear the list");
         System.out.println("Exit, To Exit the Program");
 
-        Scanner in = new Scanner(System.in);
-        String command;
+
         do
         {
 
-
             System.out.println("What is your command?");
             commandLine = in.nextLine();
+
             String[] commands = commandLine.split(" ");
             command = commands[0].toUpperCase();
-
 
             if (command.equals("ADD") && commands.length == 2)
             {
                 name = commands[1];
-                ListItem addedItem = new ListItem(name, quantity);
-
-                if (items.contains(addedItem))
+                boolean added = false;
+                for (int i = 0; i < items.size(); i++)
                 {
-                    //set up like vending machine with counter array
+                    ListItem item = items.get(i);
+                    if (item.getName().equals(name))
+                    {
+                        items.remove(item);
+                        quantity++;
+                       item.setQuantity(quantity);
+                        items.add(item);
+                        quantity = 1;
+                        added = true;
+                        break;
 
-
-                    System.out.println("You added: " );
+                    }
                 }
-                //this works, above doesn't
-                // else if (!items.contains(addedItem))
+                if (!added)
                 {
-                    //     items.add(addedItem);
-                    //     System.out.println("You added: " + addedItem.getQuantity()+ " " + name);
+                    items.add(new ListItem(name, quantity));
                 }
-
-            } else if (command.equals("PRINT"))
+            }
+            else if (command.equals("PRINT"))
             {
                 for (ListItem item : items)
                 {
@@ -76,7 +74,7 @@ public class ShoppingList
                 items.remove(x);
 
 
-            } else if (command.equals("CLEAR") && commands.length == 2)
+            } else if (command.equals("CLEAR"))
             {
                 items.clear();
                 System.out.println("LIST NOW EMPTY");
@@ -89,24 +87,17 @@ public class ShoppingList
                 }
             } else if (command.equals("FIND") && commands.length == 2)
             {
-                String[] regexe = commandLine.split(" ");
-                Pattern pattern = Pattern.compile(regexe[1]);
-                Matcher matcher = pattern.matcher(commandLine);
-                if (matcher.find()) ;
-                {
-
-                }
 
                 for (ListItem item : items)
                 {
-                    if (item.equals(regexe[1]))
+                    if (item.getName().equals(commands[1]))
                     {
                         // find the next match
-                        System.out.println("Looking for " + regexe[1]);
-                        System.out.println("Found it! " + regexe[1] + "  is in the list, Which is " + item);
-                    } else if (!item.equals(regexe))
+                        System.out.println("Looking for " + commands[1]);
+                        System.out.println("Found it! " + commands[1] + "  is in the list, Which is " + item.getName());
+                    } else if (!item.equals(commands))
                     {
-                        System.out.println("Looking for " + regexe[1]);
+                        System.out.println("Looking for " + commands[1]);
                         System.out.println("Item not found try again!");
                     } else
                     {
@@ -114,6 +105,7 @@ public class ShoppingList
                     }
                 }
             }
+
         }
         while (!command.equals("EXIT"));
         System.out.println("You Have Ended Program");
