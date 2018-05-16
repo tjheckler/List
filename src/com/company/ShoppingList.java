@@ -1,5 +1,7 @@
 package com.company;
+
 import java.util.*;
+
 public class ShoppingList
 {
 
@@ -49,7 +51,7 @@ public class ShoppingList
                     {
                         items.remove(item);
                         quantity++;
-                       item.setQuantity(quantity);
+                        item.setQuantity(quantity);
                         items.add(item);
                         quantity = 1;
                         added = true;
@@ -61,8 +63,7 @@ public class ShoppingList
                 {
                     items.add(new ListItem(name, quantity));
                 }
-            }
-            else if (command.equals("PRINT"))
+            } else if (command.equals("PRINT"))
             {
                 for (ListItem item : items)
                 {
@@ -70,8 +71,32 @@ public class ShoppingList
                 }
             } else if (command.equals("REMOVE") && commands.length == 2)
             {
-                int x = Integer.parseInt(commands[1]);
-                items.remove(x);
+                name = commands[1];
+                boolean removed = false;
+                for (int i = 0; i < items.size(); i++)
+                {
+                    ListItem item = items.get(i);
+                    if (item.getName().equals(name) && item.getQuantity() >=1)
+                    {
+                        items.remove(item);
+
+                        item.setQuantity(quantity--);
+                        items.add(item);
+
+
+                        removed = true;
+
+                        break;
+
+                    } else if (!removed && item.getQuantity() <=1)
+                    {
+                        items.remove(item);
+                        System.out.println();
+                         quantity=1;
+
+
+                    }
+                }
 
 
             } else if (command.equals("CLEAR"))
