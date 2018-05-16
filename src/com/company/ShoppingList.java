@@ -53,15 +53,17 @@ public class ShoppingList
                         quantity++;
                         item.setQuantity(quantity);
                         items.add(item);
-                        quantity = 1;
+                        System.out.println();
                         added = true;
                         break;
 
                     }
                 }
                 if (!added)
-                {
+                {   quantity = 1;
+
                     items.add(new ListItem(name, quantity));
+
                 }
             } else if (command.equals("PRINT"))
             {
