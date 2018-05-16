@@ -43,9 +43,11 @@ public class ShoppingList
             if (command.equals("ADD") && commands.length == 2)
             {
                 name = commands[1];
+
                 boolean added = false;
                 for (int i = 0; i < items.size(); i++)
                 {
+
                     ListItem item = items.get(i);
                     if (item.getName().equals(name))
                     {
@@ -55,15 +57,18 @@ public class ShoppingList
                         items.add(item);
                         System.out.println();
                         added = true;
+
                         break;
 
                     }
                 }
                 if (!added)
-                {   quantity = 1;
+                {
+
 
                     items.add(new ListItem(name, quantity));
-
+                    System.out.println();
+                    quantity = 1;
                 }
             } else if (command.equals("PRINT"))
             {
@@ -78,11 +83,11 @@ public class ShoppingList
                 for (int i = 0; i < items.size(); i++)
                 {
                     ListItem item = items.get(i);
-                    if (item.getName().equals(name) && item.getQuantity() >1)
+                    if (item.getName().equals(name) && item.getQuantity() > 1)
                     {
                         items.remove(item);
-
-                        item.setQuantity(quantity--);
+                        quantity--;
+                        item.setQuantity(quantity);
                         items.add(item);
 
 
@@ -90,11 +95,11 @@ public class ShoppingList
 
                         break;
 
-                    } else if (!removed && item.getQuantity() <=1)
+                    } else if (!removed && item.getQuantity() <= 1)
                     {
                         items.remove(item);
                         System.out.println();
-                         quantity=1;
+                        quantity = 1;
 
 
                     }
