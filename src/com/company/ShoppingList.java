@@ -76,7 +76,7 @@ public class ShoppingList
                 for (int i = 0; i < items.size(); i++)
                 {
                     ListItem item = items.get(i);
-                    if (item.getName().equals(name) && item.getQuantity() >=1)
+                    if (item.getName().equals(name) && item.getQuantity() >1)
                     {
                         items.remove(item);
 
